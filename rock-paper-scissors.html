@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Piatra Foarfeca Hartie</title>
+</head>
+
+<body>
+  <h1>Piatra Foarfeca Hartie</h1>
+
+  <button onclick="
+    playGame('piatra');
+  ">Piatra</button>
+
+  <button onclick="
+    playGame('foarfeca');
+  ">Foarfeca</button>
+
+  <button onclick="
+    playGame('hartie');
+  ">Hartie</button>
+
+  <button onclick="
+    score.castiguri = 0;
+    score.pierderi = 0;
+    score.egalitate = 0;
+    alert('Scorul a fost resetat!')
+  ">Reseteaza scorul</button>
+
+  <script>
+
+    const score = {
+      castiguri: 0,
+      pierderi: 0,
+      egalitate: 0
+    };
+
+    function randomComputerMove() {
+      const randomNumber = Math.random();
+      if (randomNumber < 1 / 3) // Piatra
+        return 'piatra';
+      else if (randomNumber < 2 / 3) // Foarfeca
+        return 'foarfeca';
+      else // Hartie
+        return 'hartie';
+    }
+
+    function playGame(move) {
+      const computerMove = randomComputerMove();
+      let result = '';
+      
+      if (move === 'piatra')
+        if (computerMove === 'piatra')
+          result = 'Egalitate.';
+        else if (computerMove === 'hartie')
+          result = 'Ai pierdut.';
+        else
+          result = 'Ai castigat.';
+      else if (move === 'hartie')
+        if (computerMove === 'piatra')
+          result = 'Ai castigat.';
+        else if (computerMove === 'hartie')
+          result = 'Egalitate.';
+        else
+          result = 'Ai pierdut.';
+      else
+        if (computerMove === 'piatra')
+          result = 'Ai pierdut.';
+        else if (computerMove === 'hartie')
+          result = 'Ai castigat.';
+        else
+          result = 'Egalitate.';
+
+      if (result === 'Ai castigat.')
+        score.castiguri++;
+      else if (result === 'Ai pierdut.')
+        score.pierderi++;
+      else
+        score.egalitate++;
+
+      alert(`Ai ales ${move}.\nCalculatorul a ales ${computerMove}.\n${result}\n\nScorul este:\n\tCastiguri : ${score.castiguri}\n\tPierderi : ${score.pierderi}\n\tEgalitati : ${score.egalitate}`);
+    }
+
+  </script>
+</body>
+
+</html>
