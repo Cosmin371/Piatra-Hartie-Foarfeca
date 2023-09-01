@@ -40,12 +40,13 @@
       score.castiguri = 0;
       score.pierderi = 0;
       score.egalitate = 0;
+      localStorage.removeItem('score');
       alert('Scorul a fost resetat!')
     ">Reseteaza scorul</button>
   </p>
   <script>
 
-    const score = {
+    const score = JSON.parse(localStorage.getItem('score')) || {
       castiguri: 0,
       pierderi: 0,
       egalitate: 0
@@ -93,6 +94,8 @@
         score.pierderi++;
       else
         score.egalitate++;
+
+      localStorage.setItem('score', JSON.stringify(score));
 
       alert(`Ai ales ${move}.\nCalculatorul a ales ${computerMove}.\n${result}\n\nScorul este:\n\tCastiguri : ${score.castiguri}\n\tPierderi : ${score.pierderi}\n\tEgalitati : ${score.egalitate}`);
     }
